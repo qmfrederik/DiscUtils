@@ -3,7 +3,7 @@
   "version": "0.15",
   "publicReleaseRefSpec": [
     "^refs/heads/master$",
-    "^refs/heads/quamotion$",
+    "^refs/heads/releases/"
     "^refs/heads/v\\d+(?:\\.\\d+)?$"
   ],
   "cloudBuild": {
