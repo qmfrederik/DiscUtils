@@ -1,6 +1,4 @@
 <Project>
-  <Import Project="..\Version.props" Condition="Exists('..\Version.props')"/>
-  
   <!-- Package related stuff -->
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.5;net40;net45</TargetFrameworks>
@@ -10,6 +8,8 @@
     <PackageProjectUrl>https://github.com/DiscUtils/DiscUtils</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
+
+    <PackageId>Quamotion.$(AssemblyName)</PackageId>
   </PropertyGroup>
 
   <!-- SourceLink support -->
