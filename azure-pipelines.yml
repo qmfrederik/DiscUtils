@@ -1,0 +1,26 @@
+jobs:
+- job: build
+  pool:
+    vmImage: 'vs2017-win2016'
+  steps:
+  - script: |
+      cd src
+      set msbuild="C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe"
+      %msbuild% /t:Restore
+      %msbuild% /t:Pack /p:Configuration=Release /p:PackageOutputPath="%BUILD_ARTIFACTSTAGINGDIRECTORY%\nuget"
+    displayName: Build
+  - publish: '$(Build.ArtifactStagingDirectory)/nuget'
+    artifact: 'nuget'
+    displayName: Publish
+  - task: NuGetCommand@2
+    inputs:
+      command: push
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/nuget/*.nupkg'
+      publishFeedCredentials: 'NuGet'
+      nuGetFeedType: external
+  - task: NuGetCommand@2
+    inputs:
+      command: push
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/nuget/*.snupkg'
+      publishFeedCredentials: 'NuGet'
+      nuGetFeedType: external
